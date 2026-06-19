@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FORMA DK - каталог продукции</title>
+  <link rel="stylesheet" href="catalog.css">
+</head>
+<body>
+  <button class="print-button" type="button" onclick="window.print()">Сохранить в PDF</button>
+  <main id="catalog"></main>
+
+  <script src="catalog-data.js"></script>
+  <script>
+    const data = window.catalogData;
+    const items = data.items.map(([name, price]) => ({ name, price }));
+    const rub = (value) => `${Number(value).toLocaleString('ru-RU')} руб/м2`;
+    const pageFooter = (label) => `
+      <div class="footer">
+        <span>${data.company.site} · ${data.company.phone}</span>
+        <span>${label}</span>
+      </div>`;
+
+    const getItems = (finish) => {
+      if (finish.id === 'tumbled') {
+        return items.filter((item) => item.name.includes('галтованная'));
+      }
+
+      return items.filter((item) => item.name.toLowerCase().includes(finish.matcher.toLowerCase()));
+    };
+
+    const splitRows = (rows) => {
+      const midpoint = Math.ceil(rows.length / 2);
+      return [rows.slice(0, midpoint), rows.slice(midpoint)];
+    };
+
+    const table = (rows) => `
+      <table>
+        <thead>
+          <tr>
+            <th>Формат и обработка</th>
+            <th>Цена</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${rows.map((item) => `
+            <tr>
+              <td>${item.name}</td>
+              <td class="price">${rub(item.price)}</td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>`;
+
+    const cover = () => `
+      <section class="page cover">
+        <div class="cover-photo">
+          <img src="${data.heroImages[0]}" alt="">
+          <img src="${data.heroImages[1]}" alt="">
+        </div>
+        <div class="inner">
+          <div class="brand">${data.company.name}</div>
+          <div>
+            <h1>Каталог брусчатки</h1>
+            <div class="subtitle">Натуральный камень, актуальные форматы, типы обработки и цены производителя.</div>
+          </div>
+          <div class="cover-meta">
+            <span>${data.company.site}</span>
+            <span>${data.company.phone}</span>
+            <span>Прайс-лист</span>
+          </div>
+        </div>
+      </section>`;
+
+    const overview = () => `
+      <section class="page">
+        <div class="inner">
+          <div class="page-head">
+            <div>
+              <div class="page-kicker">Ассортимент</div>
+              <h2>Типы обработки</h2>
+            </div>
+            <div class="price-note">Цены указаны в рублях за м2.<br>Информация собрана из действующего прайс-листа.</div>
+          </div>
+
+          <div class="finish-grid">
+            ${data.finishes.map((finish) => `
+              <article class="finish-card">
+                <img src="${finish.image}" alt="${finish.title}">
+                <div>
+                  <h3>${finish.title}</h3>
+                  <p>${finish.lead}</p>
+                </div>
+              </article>
+            `).join('')}
+          </div>
+
+          <div class="stats">
+            <div class="stat"><strong>${items.length}</strong><span>позиций в прайс-листе</span></div>
+            <div class="stat"><strong>${data.finishes.length}</strong><span>основных типа обработки</span></div>
+            <div class="stat"><strong>КБР</strong><span>бордюрные форматы отдельным разделом</span></div>
+          </div>
+        </div>
+        ${pageFooter('01')}
+      </section>`;
+
+    const finishPage = (finish, index) => {
+      const finishItems = getItems(finish);
+      const [left, right] = splitRows(finishItems);
+      return `
+        <section class="page finish-page">
+          <div class="inner">
+            <aside class="finish-aside">
+              <div>
+                <div class="page-kicker">${finish.shortTitle}</div>
+                <h2>${finish.title}</h2>
+                <p class="finish-lead">${finish.lead}</p>
+              </div>
+              <img class="finish-photo" src="${finish.image}" alt="${finish.title}">
+            </aside>
+            <div class="table-wrap">
+              <div class="page-head">
+                <div>
+                  <div class="page-kicker">Позиции</div>
+                  <h2>Форматы и цены</h2>
+                </div>
+                <div class="price-note">${finishItems.length} позиций<br>руб/м2</div>
+              </div>
+              <div class="table-columns">
+                ${table(left)}
+                ${table(right)}
+              </div>
+            </div>
+          </div>
+          ${pageFooter(String(index).padStart(2, '0'))}
+        </section>`;
+    };
+
+    const kbrPage = () => {
+      const kbr = items.filter((item) => item.name.includes('КБР'));
+      const [left, right] = splitRows(kbr);
+      return `
+        <section class="page kbr-page">
+          <div class="inner">
+            <aside class="kbr-panel">
+              <div class="page-kicker">Бордюр</div>
+              <h2>КБР</h2>
+              <p>Пиленые бордюрные камни вынесены отдельно, чтобы прайс легко читался вместе с основными форматами брусчатки.</p>
+            </aside>
+            <div>
+              <div class="page-head">
+                <div>
+                  <div class="page-kicker">Позиции</div>
+                  <h2>Форматы и цены</h2>
+                </div>
+                <div class="price-note">${kbr.length} позиций<br>руб/м2</div>
+              </div>
+              <div class="table-columns">
+                ${table(left)}
+                ${table(right)}
+              </div>
+            </div>
+          </div>
+          ${pageFooter('06')}
+        </section>`;
+    };
+
+    const contactPage = () => `
+      <section class="page contact-page">
+        <div class="inner">
+          <div>
+            <div class="page-kicker">Контакты</div>
+            <h2>${data.company.legalName}</h2>
+            <div class="contact-block">
+              <div class="contact-row"><span>Телефон</span>${data.company.phone}</div>
+              <div class="contact-row"><span>Сайт</span>${data.company.site}</div>
+              <div class="contact-row"><span>Адрес</span>${data.company.address}</div>
+              <div class="contact-row"><span>Реквизиты</span>${data.company.inn}, ${data.company.kpp}</div>
+              <div class="contact-row"><span>Банк</span>${data.company.account}<br>${data.company.bank}</div>
+            </div>
+          </div>
+          <img class="contact-image" src="${data.heroImages[2]}" alt="">
+        </div>
+        ${pageFooter('07')}
+      </section>`;
+
+    document.getElementById('catalog').innerHTML = [
+      cover(),
+      overview(),
+      ...data.finishes.map((finish, index) => finishPage(finish, index + 2)),
+      kbrPage(),
+      contactPage()
+    ].join('');
+  </script>
+</body>
+</html>

@@ -1,0 +1,380 @@
+:root {
+  --ink: #171716;
+  --muted: #66645f;
+  --line: #d8d5cd;
+  --paper: #f5f2ec;
+  --stone: #343633;
+  --moss: #647257;
+  --copper: #9b6f42;
+  --white: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: #d8d8d8;
+  color: var(--ink);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  margin: 0;
+}
+
+.page {
+  position: relative;
+  width: 297mm;
+  min-height: 210mm;
+  margin: 16px auto;
+  overflow: hidden;
+  background: var(--paper);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.2);
+  page-break-after: always;
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  height: 210mm;
+  padding: 17mm 18mm;
+}
+
+.cover {
+  background: #111;
+  color: var(--white);
+}
+
+.cover .cover-photo {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: 1.35fr 0.85fr;
+  opacity: 0.72;
+}
+
+.cover .cover-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cover .cover-photo img:first-child {
+  filter: contrast(1.04) saturate(0.96);
+}
+
+.cover::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.82) 0%, rgba(0, 0, 0, 0.52) 42%, rgba(0, 0, 0, 0.16) 100%),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.58), transparent 45%);
+}
+
+.cover .inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.brand {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.cover h1 {
+  max-width: 620px;
+  margin: 0;
+  font-size: 76px;
+  line-height: 0.96;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.cover .subtitle {
+  max-width: 560px;
+  margin-top: 18px;
+  font-size: 23px;
+  line-height: 1.28;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.cover-meta {
+  display: grid;
+  grid-template-columns: repeat(3, max-content);
+  gap: 28px;
+  align-items: end;
+  color: rgba(255, 255, 255, 0.86);
+  font-size: 14px;
+}
+
+.page-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  padding-bottom: 10mm;
+}
+
+.page-kicker {
+  margin-bottom: 8px;
+  color: var(--copper);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+}
+
+h2 {
+  margin: 0;
+  font-size: 36px;
+  line-height: 1.05;
+  letter-spacing: 0;
+}
+
+h3 {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.2;
+}
+
+.price-note {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+  text-align: right;
+}
+
+.finish-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.finish-card {
+  overflow: hidden;
+  background: var(--white);
+  border: 1px solid var(--line);
+}
+
+.finish-card img {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  display: block;
+}
+
+.finish-card div {
+  min-height: 105px;
+  padding: 12px;
+}
+
+.finish-card p {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.38;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.stat {
+  padding: 16px;
+  background: var(--stone);
+  color: var(--white);
+}
+
+.stat strong {
+  display: block;
+  font-size: 30px;
+  line-height: 1;
+}
+
+.stat span {
+  display: block;
+  margin-top: 7px;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 12px;
+}
+
+.finish-page .inner {
+  display: grid;
+  grid-template-columns: 88mm 1fr;
+  gap: 14mm;
+}
+
+.finish-aside {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.finish-photo {
+  width: 100%;
+  height: 116mm;
+  object-fit: cover;
+  background: #ddd;
+}
+
+.finish-lead {
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.48;
+}
+
+.table-wrap {
+  min-width: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(255, 255, 255, 0.56);
+  font-size: 12px;
+}
+
+th {
+  padding: 8px 10px;
+  color: var(--white);
+  background: var(--stone);
+  font-size: 11px;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+td {
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+
+td.price {
+  width: 31mm;
+  color: var(--ink);
+  font-weight: 700;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.table-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.kbr-page .inner {
+  display: grid;
+  grid-template-columns: 76mm 1fr;
+  gap: 12mm;
+}
+
+.kbr-panel {
+  padding: 18px;
+  background: var(--stone);
+  color: var(--white);
+}
+
+.kbr-panel p {
+  margin: 12px 0 0;
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 14px;
+  line-height: 1.48;
+}
+
+.contact-page .inner {
+  display: grid;
+  grid-template-columns: 1fr 92mm;
+  gap: 14mm;
+  align-items: stretch;
+}
+
+.contact-block {
+  display: grid;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.contact-row {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 17px;
+}
+
+.contact-row span {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+}
+
+.contact-image {
+  width: 100%;
+  height: 100%;
+  min-height: 166mm;
+  object-fit: cover;
+}
+
+.footer {
+  position: absolute;
+  right: 18mm;
+  bottom: 8mm;
+  left: 18mm;
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.print-button {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 20;
+  padding: 11px 16px;
+  border: 0;
+  background: var(--stone);
+  color: var(--white);
+  font: 700 14px Arial, sans-serif;
+  cursor: pointer;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.24);
+}
+
+@media print {
+  @page {
+    size: A4 landscape;
+    margin: 0;
+  }
+
+  html,
+  body {
+    width: 297mm;
+    background: var(--paper);
+  }
+
+  .page {
+    width: 297mm;
+    height: 210mm;
+    min-height: 210mm;
+    margin: 0;
+    box-shadow: none;
+    break-after: page;
+  }
+
+  .print-button {
+    display: none;
+  }
+}

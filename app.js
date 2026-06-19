@@ -21,7 +21,7 @@ const processingTypes = [
     title: "Колото-пиленая",
     tag: "Натуральная фактура",
     description: "Выразительная поверхность доломита с точной пиленой базой для надежной укладки.",
-    image: "assets/site/split-sawn-premium.png",
+    image: "assets/site/split-sawn-premium.jpg",
     gallery: [
       "assets/site/gallery-split-sawn.jpg",
       "assets/site/gallery-dolomite-set-light.jpg",
@@ -33,7 +33,7 @@ const processingTypes = [
     title: "Галтованная",
     tag: "Эффект старинной мостовой",
     description: "Смягченные ребра и фактура доломита с эффектом выдержанной брусчатки.",
-    image: "assets/site/tumbled-premium.png",
+    image: "assets/site/tumbled-premium.jpg",
     gallery: [
       "assets/site/gallery-tumbled.jpg",
       "assets/site/gallery-dolomite-cube.jpg",
