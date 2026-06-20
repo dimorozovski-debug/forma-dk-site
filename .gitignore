@@ -1,0 +1,11 @@
+# Raw source media should not be uploaded to GitHub Pages.
+*.zip
+*.mov
+*.mp4
+
+# Local/raw production folders.
+DKForma/video/
+DKForma/ФОТО и ВИДЕО ПРОДУКЦИИ/
+
+# Temporary image conversion files.
+*.tmp.png

@@ -22,9 +22,9 @@ const js = read("app.js");
 
 const requiredText = [
   "Натуральный камень",
-  "Собственный карьер",
+  "Собственные карьеры",
   "Каталог и прайс",
-  "Реальная укладка",
+  "Галерея объектов",
   "8 800 505-76-30",
 ];
 
@@ -33,8 +33,8 @@ const requiredSelectors = [
   ".product-photo",
   ".catalog-layout",
   ".quarry-photo",
-  ".object-gallery",
-  ".border-strip",
+  ".editorial-gallery",
+  ".gallery-category-grid",
   ".gallery-modal",
 ];
 

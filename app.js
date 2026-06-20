@@ -12,6 +12,10 @@ const processingTypes = [
     image: "assets/site/full-sawn.jpeg",
     gallery: [
       "assets/site/gallery-full-sawn.jpg",
+      "assets/site/full-sawn-step-03.jpg",
+      "assets/site/full-sawn-step-04.jpg",
+      "assets/site/full-sawn-step-01.jpg",
+      "assets/site/full-sawn-step-02.jpg",
       "assets/site/gallery-dolomite-set-light.jpg",
       "assets/site/gallery-dolomite-set-dark.jpg",
     ],
@@ -24,8 +28,11 @@ const processingTypes = [
     image: "assets/site/split-sawn-premium.jpg",
     gallery: [
       "assets/site/gallery-split-sawn.jpg",
-      "assets/site/gallery-dolomite-set-light.jpg",
-      "assets/site/gallery-dolomite-set-dark.jpg",
+      "assets/site/split-sawn-100x100x50-01.jpg",
+      "assets/site/split-sawn-100x100x50-02.jpg",
+      "assets/site/split-sawn-100x100x50-03.jpg",
+      "assets/site/split-sawn-100x100x50-04.jpg",
+      "assets/site/split-sawn-100x100x50-05.jpg",
     ],
     alt: "Колото-пиленая плитка из темно-серого камня на светлом фоне",
   },
@@ -36,8 +43,10 @@ const processingTypes = [
     image: "assets/site/tumbled-premium.jpg",
     gallery: [
       "assets/site/gallery-tumbled.jpg",
-      "assets/site/gallery-dolomite-cube.jpg",
-      "assets/site/gallery-aura.jpg",
+      "assets/site/tumbled-100x100x50-01.jpg",
+      "assets/site/tumbled-100x100x50-02.jpg",
+      "assets/site/tumbled-100x100x50-03.jpg",
+      "assets/site/tumbled-100x100x50-04.webp",
     ],
     alt: "Галтованная брусчатка со скругленными ребрами на светлом фоне",
   },
@@ -48,8 +57,11 @@ const processingTypes = [
     image: "assets/site/aura.jpeg",
     gallery: [
       "assets/site/gallery-aura.jpg",
-      "assets/site/gallery-dolomite-cube.jpg",
-      "assets/site/gallery-tumbled.jpg",
+      "assets/site/aura-vibro-100x100x100-01.jpg",
+      "assets/site/aura-vibro-100x100x100-02.jpg",
+      "assets/site/aura-vibro-100x100x100-03.jpg",
+      "assets/site/aura-vibro-100x100x100-04.jpg",
+      "assets/site/aura-vibro-100x100x100-05.jpg",
     ],
     alt: "Серый куб брусчатки Aura с мягкими гранями на светлом фоне",
   },
@@ -149,6 +161,14 @@ function shiftGallery(direction) {
 }
 
 document.addEventListener("click", (event) => {
+  const galleryTrigger = event.target.closest?.("[data-gallery-open]");
+  if (galleryTrigger) {
+    const card = galleryTrigger.closest(".product-card");
+    const image = card?.querySelector(".product-photo");
+    if (card && image) openGallery(card, image);
+    return;
+  }
+
   const media = event.target.closest?.(".product-media");
   if (media) {
     const card = media.closest(".product-card");
